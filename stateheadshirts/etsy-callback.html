@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Etsy OAuth Callback</title>
+</head>
+<body>
+  <h1>Etsy authorization received</h1>
+  <p>Copy the authorization code below and paste it into the local command.</p>
+  <pre id="code">Looking for code...</pre>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const error = params.get("error");
+    const output = document.getElementById("code");
+
+    if (code) {
+      output.textContent = code;
+    } else if (error) {
+      output.textContent = "Error: " + error + "\n\n" + (params.get("error_description") || "");
+    } else {
+      output.textContent = "No code found in URL.";
+    }
+  </script>
+</body>
+</html>
